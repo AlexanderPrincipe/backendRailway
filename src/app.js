@@ -24,10 +24,14 @@ app.get("/clientes", async (req, res, next) => {
   }
 })
 
-app.get("/createCliente", async (req, res) => {
+app.post("/create", async (req, res) => {
   try {
-    let result = await pool.query('INSERT INTO CLIENTE(nombre) VALUES ("Cliente3")');
-    res.json(result);
+    const {nombre} = req.body;
+    const newCliente = {
+      nombre
+    }
+    console.log('NEW CLIENTE', newCliente);
+    await pool.query('INSERT INTO CLIENTE(nombre) set ?', [newCliente]);
   } catch (err) {
     next(err);
   }
