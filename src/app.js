@@ -8,6 +8,8 @@ app.get("/", async (req, res, next) => {
   try {
     console.log('RUTA BASE!');
     res.send('hola mundo desde railway');
+    let clientes = await pool.query('SELECT * FROM CLIENTE');
+    console.log('TRAER CLIENTES! 1', clientes);
   } catch (err) {
     next(err);
   }
