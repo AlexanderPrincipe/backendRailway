@@ -7,9 +7,11 @@ const app = express();
 app.get("/", async (req, res, next) => {
   try {
     console.log('RUTA BASE!');
+    let clientes = await pool.query('SELECT * FROM Cliente');
+    console.log('TRAER CLIENTES!', clientes);
+    res.send(clientes[0]);
+    res.json(clientes[0]);
     res.send('hola mundo desde railway');
-    let clientes = await pool.query('SELECT * FROM CLIENTE');
-    console.log('TRAER CLIENTES! 1', clientes);
   } catch (err) {
     next(err);
   }
