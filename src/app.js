@@ -4,6 +4,14 @@ const PORT = require('./config');
 const pool = require('./database');
 const app = express();
 
+app.get("/", async (req, res, next) => {
+  try {
+    res.send('hola mundo desde railway');
+  } catch (err) {
+    next(err);
+  }
+})
+
 app.get("/clientes", async (req, res, next) => {
   try {
     let clientes = await pool.query('SELECT * FROM CLIENTE');
