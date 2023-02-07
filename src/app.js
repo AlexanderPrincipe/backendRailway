@@ -6,6 +6,7 @@ const app = express();
 
 app.get("/", async (req, res, next) => {
   try {
+    console.log('RUTA BASE!');
     res.send('hola mundo desde railway');
   } catch (err) {
     next(err);
@@ -14,6 +15,7 @@ app.get("/", async (req, res, next) => {
 
 app.get("/clientes", async (req, res, next) => {
   try {
+    console.log('TRAER CLIENTES!');
     let clientes = await pool.query('SELECT * FROM CLIENTE');
     res.send(clientes[0]);
     res.json(clientes[0]);
