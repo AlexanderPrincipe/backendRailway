@@ -15,8 +15,8 @@ app.get("/", async (req, res, next) => {
 
 app.get("/clientes", async (req, res, next) => {
   try {
-    console.log('TRAER CLIENTES!');
     let clientes = await pool.query('SELECT * FROM CLIENTE');
+    console.log('TRAER CLIENTES!', clientes);
     res.send(clientes[0]);
     res.json(clientes[0]);
   } catch (err) {
