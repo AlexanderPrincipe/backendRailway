@@ -18,7 +18,7 @@ router.get('/users', (req,res)=>{
 
 router.get('/clientes', (req,res)=>{
   console.log('PROBANDO CLIENTES');
-  mysqlConnection.query('select * from Cliente', (err,rows,fields) => {
+  mysqlConnection.query('select * from cliente', (err,rows,fields) => {
     if(!err){
       res.json(rows);
       console.log('ROWS', rows);
@@ -29,8 +29,8 @@ router.get('/clientes', (req,res)=>{
 });
 
 router.post('/add', (req,res)=>{
-  const {nombre} = req.body;
-  console.log('add CLIENTES', nombre);
+  const nombre = req.body;
+  console.log('add CLIENTES', req.body);
   mysqlConnection.query('INSERT INTO Cliente (nombre) values(?)',
   [nombre],
    (err,rows,fields) => {
@@ -57,7 +57,7 @@ router.post('/login', (req,res) => {
       }else{
         res.json('Usuario o clave incorrectos!!!');
       }
-
+      
     }else{
       console.log(err);
     }
