@@ -18,7 +18,7 @@ router.get('/users', (req,res)=>{
 
 router.get('/clientes', (req,res)=>{
   console.log('PROBANDO CLIENTES');
-  mysqlConnection.query('select * from cliente', (err,rows,fields) => {
+  mysqlConnection.query('select * from Cliente', (err,rows,fields) => {
     if(!err){
       res.json(rows);
       console.log('ROWS', rows);
