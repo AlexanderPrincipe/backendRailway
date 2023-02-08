@@ -29,8 +29,8 @@ router.get('/clientes', (req,res)=>{
 });
 
 router.post('/add', (req,res)=>{
-  const {nombre} = req.body;
-  console.log('add CLIENTES', nombre);
+  const nombre = req.body;
+  console.log('add CLIENTES', req.body);
   mysqlConnection.query('INSERT INTO Cliente (nombre) values(?)',
   [nombre],
    (err,rows,fields) => {
@@ -43,45 +43,45 @@ router.post('/add', (req,res)=>{
   })
 });
 
-// router.post('/login', (req,res) => {
-//   const { userName, pass } = req.body;
-//   console.log('REQ BODY', req.body);
-//   mysqlConnection.query('select userName,roleId from user where username=? and pass=?',
-//   [userName,pass],
-//   (err,rows,fields) => {
-//     if(!err){
-//       if(rows.length >0){
-//         let data = JSON.stringify(rows[0]);
-//         const token = jwt.sign(data, 'stil');
-//         res.json({token});
-//       }else{
-//         res.json('Usuario o clave incorrectos!!!');
-//       }
-      
-//     }else{
-//       console.log(err);
-//     }
-//   }
-//   )
-// })
+router.post('/login', (req,res) => {
+  const { userName, pass } = req.body;
+  console.log('REQ BODY', req.body);
+  mysqlConnection.query('select userName,roleId from user where username=? and pass=?',
+  [userName,pass],
+  (err,rows,fields) => {
+    if(!err){
+      if(rows.length >0){
+        let data = JSON.stringify(rows[0]);
+        const token = jwt.sign(data, 'stil');
+        res.json({token});
+      }else{
+        res.json('Usuario o clave incorrectos!!!');
+      }
 
-// router.post('/test',verifyToken, (req,res) => {
-//   res.json('Informacion secreta');
-// })
+    }else{
+      console.log(err);
+    }
+  }
+  )
+})
 
-// function verifyToken(req,res, next){
-//   if(!req.headers.authorization) return res.status(401).json('No autorizado');
+router.post('/test',verifyToken, (req,res) => {
+  res.json('Informacion secreta');
+})
 
-//   const token = req.headers.authorization.substr(7);
-//   if(token!==''){
-//     const content = jwt.verify(token,'stil');
-//     req.data = content;
-//     next();
-//   }else{
-//     res.status(401).json('Token vacio');
-//   }
+function verifyToken(req,res, next){
+  if(!req.headers.authorization) return res.status(401).json('No autorizado');
 
-// }
+  const token = req.headers.authorization.substr(7);
+  if(token!==''){
+    const content = jwt.verify(token,'stil');
+    req.data = content;
+    next();
+  }else{
+    res.status(401).json('Token vacio');
+  }
+
+}
 
 
 module.exports = router;
