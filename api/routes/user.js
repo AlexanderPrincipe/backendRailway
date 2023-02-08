@@ -18,29 +18,29 @@ router.get('/users', (req,res)=>{
 
 router.get('/clientes', (req,res)=>{
   console.log('PROBANDO CLIENTES');
-  // mysqlConnection.query('select * from Cliente', (err,rows,fields) => {
-  //   if(!err){
-  //     res.json(rows);
-  //     console.log('ROWS', rows);
-  //   }else{
-  //     console.log(err);
-  //   }
-  // })
+  mysqlConnection.query('select * from Cliente', (err,rows,fields) => {
+    if(!err){
+      res.json(rows);
+      console.log('ROWS', rows);
+    }else{
+      console.log(err);
+    }
+  })
 });
 
 router.post('/add', (req,res)=>{
   const {nombre} = req.body;
   console.log('add CLIENTES', nombre);
-  // mysqlConnection.query('INSERT INTO Cliente (nombre) values(?)',
-  // [nombre],
-  //  (err,rows,fields) => {
-  //   if(!err){
-  //     res.json(rows);
-  //     console.log('ROWS', rows);
-  //   }else{
-  //     console.log(err);
-  //   }
-  // })
+  mysqlConnection.query('INSERT INTO Cliente (nombre) values(?)',
+  [nombre],
+   (err,rows,fields) => {
+    if(!err){
+      res.json(rows);
+      console.log('ROWS', rows);
+    }else{
+      console.log(err);
+    }
+  })
 });
 
 router.post('/login', (req,res) => {
