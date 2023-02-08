@@ -7,5 +7,4 @@ const config = {
   DB_PORT: process.env.DB_PORT || 3306
 }
 
-
 module.exports = config;

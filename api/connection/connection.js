@@ -13,7 +13,7 @@ mysqlConnection.connect((err) => {
   if (err) {
 		console.log('error', err);
   } else {
-		console.log('DB OK');
+		console.log('DB CORRECTAMENTE CONECTADA');
 	}
 });
 
