@@ -29,8 +29,8 @@ router.get('/clientes', (req,res)=>{
 });
 
 router.post('/add', (req,res)=>{
-  const nombre = req.body;
-  console.log('add CLIENTES', req.body);
+  const {nombre} = req.body;
+  console.log('add CLIENTES', nombre);
   mysqlConnection.query('INSERT INTO Cliente (nombre) values(?)',
   [nombre],
    (err,rows,fields) => {
